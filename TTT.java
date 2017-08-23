@@ -1,4 +1,3 @@
-package TicTacToe;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,10 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class TTT implements ActionListener {
+ public class TTT implements ActionListener {
       JFrame jf;
       JPanel jp;
       int a=0;
@@ -21,18 +21,18 @@ public class TTT implements ActionListener {
       String c1;
       int count1=0,count2=0;
       JMenuBar jm;    
-      JMenu rt = new JMenu("Reset"); 
-public TTT(){
+      JMenu rt = new JMenu("options"); 
+      JMenuItem jmit = new JMenuItem("reset");
+      
+ public TTT(){
     jm=new JMenuBar();
-   
     jm.add(rt);
-    
-    
+    rt.add(jmit);
     jf=new JFrame("Tic-Tac-Toe Game");
     jp=new JPanel();
     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     jf.setSize(400,400);
-     jf.setResizable(false);
+    jf.setResizable(false);
     jf.setVisible(true);
     jp.setLayout(new GridLayout(3,3));
     jf.setJMenuBar(jm);
@@ -53,33 +53,25 @@ public TTT(){
         jb[i][j].addActionListener( this);
     }
  }
-    
-    
+    jmit.addActionListener(this);
 }
-    
       @Override
       public void actionPerformed(ActionEvent e){
           for(int i=0;i<jb.length;i++){
               for(int j=0;j<jb.length;j++){
        if(e.getSource()==jb[i][j]){
            if(a==0){
-            
            jb[i][j].setIcon(x1);
            a++;
            count1++;
        }
        else{
-       
         jb[i][j].setIcon(x2);
-      
-       
            a--;
            count2++;
            } 
        //    jb[i][j].setEnabled(false);
            if(count1>2 || count2>2){
-               
-             
                if(jb[0][0].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[2][2].getIcon() && jb[0][0].getIcon()==x1 || jb[0][2].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[2][0].getIcon() && jb[1][1].getIcon()==x1)
 	    {
 	   JOptionPane.showMessageDialog(null,"  Player O wins  ","Result",JOptionPane.DEFAULT_OPTION);
@@ -90,21 +82,16 @@ public TTT(){
         } 
     else if(jb[0][0].getIcon()==jb[0][1].getIcon() && jb[0][1].getIcon()== jb[0][2].getIcon() && jb[0][0].getIcon()==x2 || jb[1][0].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[1][2].getIcon() && jb[1][1].getIcon()==x2 || jb[2][0].getIcon()==jb[2][1].getIcon() && jb[2][1].getIcon()== jb[2][2].getIcon() && jb[2][2].getIcon()==x2)
     {    
-               
           JOptionPane.showMessageDialog(null,"  Player X wins  ","Result",JOptionPane.DEFAULT_OPTION);     
-               
     }
     else if(jb[0][0].getIcon()==jb[0][1].getIcon() && jb[0][1].getIcon()== jb[0][2].getIcon() && jb[0][0].getIcon()==x1 || jb[1][0].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[1][2].getIcon() && jb[1][1].getIcon()==x2 || jb[2][0].getIcon()==jb[2][1].getIcon() && jb[2][1].getIcon()== jb[2][2].getIcon() && jb[2][2].getIcon()==x1)
             {
-       
                JOptionPane.showMessageDialog(null,"  Player O wins  ","Result",JOptionPane.DEFAULT_OPTION); 
     } 
                else if(jb[0][0].getIcon()==jb[1][0].getIcon() && jb[1][0].getIcon()== jb[2][0].getIcon() && jb[0][0].getIcon()==x1 || jb[0][1].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[2][1].getIcon() && jb[1][1].getIcon()==x1 || jb[0][2].getIcon()==jb[1][2].getIcon() && jb[1][2].getIcon()== jb[2][2].getIcon() && jb[2][2].getIcon()==x1)
             {
-       
                JOptionPane.showMessageDialog(null,"  Player O wins  ","Result",JOptionPane.DEFAULT_OPTION); 
             }           
-               
              else if(jb[0][0].getIcon()==jb[1][0].getIcon() && jb[1][0].getIcon()== jb[2][0].getIcon() && jb[0][0].getIcon()==x2 || jb[0][1].getIcon()==jb[1][1].getIcon() && jb[1][1].getIcon()== jb[2][1].getIcon() && jb[1][1].getIcon()==x2 || jb[0][2].getIcon()==jb[1][2].getIcon() && jb[1][2].getIcon()== jb[2][2].getIcon() && jb[2][2].getIcon()==x2)
              {
                JOptionPane.showMessageDialog(null,"  Player X wins  ","Result",JOptionPane.DEFAULT_OPTION); 
@@ -116,7 +103,8 @@ public TTT(){
       }  
       }
       }
-        if(e.getSource()==rt)
+          
+        if(e.getSource()==jmit)
         { 
         
         for(int i=0;i<3;i++)
